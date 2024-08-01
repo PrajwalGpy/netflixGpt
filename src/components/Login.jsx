@@ -5,14 +5,21 @@ import { checkValidate } from "../utils/Validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/FireBase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/useSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [userSignIn, setUserSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const nameRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,40 +33,45 @@ const Login = () => {
     if (message) return;
 
     if (!userSignIn) {
+      const name = nameRef.current.value;
+
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          // Signed up
           const user = userCredential.user;
-          setErrorMessage(
-            <div className="font-medium text-lg text-green-700">
-              User created successfully
-            </div>
-          );
-          console.log(user);
+          updateProfile(user, {
+            displayName: name,
+            photoURL: "https://avatars.githubusercontent.com/u/136236335?v=4",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(addUser({ uid, email, displayName, photoURL }));
+              setErrorMessage(
+                <div className="font-medium text-lg text-green-700">
+                  User created successfully
+                </div>
+              );
+              navigate("/Browse");
+            })
+            .catch((error) => {
+              setErrorMessage(`Error updating profile: ${error.message}`);
+            });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(
-            `Error creating user: ${errorCode} - ${errorMessage}`
-          );
+          setErrorMessage(`Error creating user: ${error.message}`);
         });
     } else {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
           setErrorMessage(
             <div className="font-medium text-lg text-green-700">
               User signed in successfully
             </div>
           );
-          console.log(user);
+          navigate("/Browse");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(`Error signing in: ${errorMessage}`);
+          setErrorMessage(`Error signing in: ${error.message}`);
         });
     }
   };
@@ -83,6 +95,7 @@ const Login = () => {
         </div>
         {!userSignIn && (
           <input
+            ref={nameRef}
             type="text"
             placeholder="Full Name"
             className="bg-slate-900 py-3 px-2 rounded-md"
@@ -96,7 +109,7 @@ const Login = () => {
         />
         <input
           ref={passwordRef}
-          type="password" // Changed to type password for security
+          type="password"
           placeholder="Password"
           className="bg-slate-900 py-3 px-2 rounded-md"
         />
