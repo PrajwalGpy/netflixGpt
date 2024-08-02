@@ -8,13 +8,13 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/FireBase";
-import { useNavigate } from "react-router-dom";
+import netflix_Prifile_img from "../assets/netflix-profile-pictures.webp";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/useSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const [userSignIn, setUserSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const emailRef = useRef(null);
@@ -40,7 +40,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name,
-            photoURL: "https://avatars.githubusercontent.com/u/136236335?v=4",
+            photoURL: netflix_Prifile_img,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -50,7 +50,6 @@ const Login = () => {
                   User created successfully
                 </div>
               );
-              navigate("/Browse");
             })
             .catch((error) => {
               setErrorMessage(`Error updating profile: ${error.message}`);
@@ -68,7 +67,6 @@ const Login = () => {
               User signed in successfully
             </div>
           );
-          navigate("/Browse");
         })
         .catch((error) => {
           setErrorMessage(`Error signing in: ${error.message}`);
