@@ -1,0 +1,26 @@
+export default [
+  {
+    iso_639_1: "en",
+    iso_3166_1: "US",
+    name: "Final Trailer",
+    key: "Idh8n5XuYIA",
+    site: "YouTube",
+    size: 1080,
+    type: "Trailer",
+    official: true,
+    published_at: "2024-07-19T14:00:23.000Z",
+    id: "669a8ad15777920d534e6606",
+  },
+  {
+    iso_639_1: "en",
+    iso_3166_1: "US",
+    name: "Official Trailer",
+    key: "73_1biulkYk",
+    site: "YouTube",
+    size: 1080,
+    type: "Trailer",
+    official: true,
+    published_at: "2024-04-22T13:00:09.000Z",
+    id: "662668b62dda890149e08b9b",
+  },
+];

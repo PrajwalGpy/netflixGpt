@@ -1,13 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./useSlice"; // Corrected import statement
-import MovieSlice from "./MovieSlice";
+import userSlice from "./useSlice"; // Ensure this is the correct path
+import movieSlice from "./MovieSlice"; // Ensure this is the correct path
 
 const appStore = configureStore({
   reducer: {
     user: userSlice,
-    movie: MovieSlice,
+    movies: movieSlice, // Make sure the key matches the slice name
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(), // Correctly setting up middleware as a callback
 });
 
 export default appStore;

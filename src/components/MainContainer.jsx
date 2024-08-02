@@ -4,20 +4,21 @@ import { VideoTitle } from "./VideoTitle ";
 import { useSelector } from "react-redux";
 
 export const MainContainer = () => {
-  const movies = useSelector((store) => store.movie?.nowPlayingMovies);
+  const movies = useSelector((store) => store.movies?.nowPlayingMovies);
+  console.log("Movies from Redux store:", movies);
 
-  console.log("Movies from Redux store:", movies); // Add a console log to debug
-
-  if (!movies) return;
+  if (!movies || movies.length === 0) {
+    return <div>No movies available</div>;
+  }
 
   const mainMovie = movies[0];
   console.log("Main movie:", mainMovie);
-  const { original_title, overview } = mainMovie;
+  const { original_title, overview, id } = mainMovie;
 
   return (
     <div>
       <VideoTitle title={original_title} overview={overview} />
-      <VideoBackground />
+      <VideoBackground videoId={id} />
     </div>
   );
 };
