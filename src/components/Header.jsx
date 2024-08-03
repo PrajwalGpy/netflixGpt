@@ -6,6 +6,8 @@ import { auth } from "../utils/FireBase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/useSlice";
+import { RiRobot3Fill } from "react-icons/ri";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -35,23 +37,38 @@ const Header = () => {
 
     return () => unsubscribe();
   }, [dispatch]);
+
+  const handleGptClick = () => {
+    dispatch(toggleGptSearchView());
+  };
   return (
-    <div className="w-full absolute bg-gradient-to-b from-black px-3 py-4 z-50 flex justify-between items-center">
+    <div className="w-full absolute bg-gradient-to-b from-black px-4 py-4 z-50 flex justify-between items-center">
       <img src={netflix_Logo} alt="Netflix_Logo" className="w-36" />
+
       {user && (
-        <div className="flex">
-          <img
-            src={user.photoURL || netflix_Prifile_img}
-            alt="netflix profile pictures "
-            className="w-14"
-          />
-          <button
-            onClick={handelSignOut}
-            className="text-white font-bold text-base"
+        <dir className="flex items-center justify-center gap-10">
+          <div
+            className="flex bg-red-600 hover:bg-opacity-80 text-white cursor-pointer font-semibold py-2 px-2 rounded-lg items-center justify-center gap-3"
+            onClick={handleGptClick}
           >
-            Sign Out
-          </button>
-        </div>
+            <RiRobot3Fill className="text-xl" />
+            <p> GPT Search</p>
+          </div>
+          <div className="flex  items-center justify-center gap-3">
+            <img
+              src={user.photoURL || netflix_Prifile_img}
+              alt="netflix profile pictures "
+              className="w-14"
+            />
+
+            <button
+              className=" hover:bg-opacity-80 text-white font-semibold py-2 px-2 rounded-lg"
+              onClick={handelSignOut}
+            >
+              Sign Out
+            </button>
+          </div>
+        </dir>
       )}
     </div>
   );
