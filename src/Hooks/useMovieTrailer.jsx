@@ -2,9 +2,11 @@ import { useDispatch } from "react-redux";
 import { API__OPTION } from "../utils/constencs";
 import { addTrailer } from "../utils/MovieSlice";
 import { useEffect } from "react";
+import localTrailers from "../json/MovieTriler"; // Adjust the path as necessary
 
 const useMovieTrailer = (videoId) => {
   const dispatch = useDispatch();
+
   const getMovieVideo = async () => {
     try {
       const response = await fetch(
@@ -22,6 +24,9 @@ const useMovieTrailer = (videoId) => {
       dispatch(addTrailer(Trailer));
     } catch (error) {
       console.error("Failed to fetch movie video:", error);
+      console.log("Using fallback data");
+      const fallbackTrailer = localTrailers[0];
+      dispatch(addTrailer(fallbackTrailer));
     }
   };
 
@@ -31,4 +36,5 @@ const useMovieTrailer = (videoId) => {
     }
   }, [videoId]);
 };
+
 export default useMovieTrailer;

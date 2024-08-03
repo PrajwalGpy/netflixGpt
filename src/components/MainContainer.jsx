@@ -11,12 +11,12 @@ export const MainContainer = () => {
     return <div>No movies available</div>;
   }
 
-  const mainMovie = movies[0];
+  const mainMovie = movies[13];
   console.log("Main movie:", mainMovie);
   const { original_title, overview, id } = mainMovie;
 
   return (
-    <div>
+    <div className=" ">
       <VideoTitle title={original_title} overview={overview} />
       <VideoBackground videoId={id} />
     </div>

@@ -18,7 +18,7 @@ const useNowPlayingMovie = () => {
         throw new Error("Network response was not ok");
       }
       let data = await response.json();
-      console.log("API data:", data);
+      console.log("now_playing", data);
       dispatch(addNowPlayingMovie(data.results));
     } catch (error) {
       console.error(
