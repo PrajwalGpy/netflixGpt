@@ -8,3 +8,5 @@ export const API__OPTION = {
 };
 
 export const img_Cdn = "https://image.tmdb.org/t/p/w300/";
+export const Api_Key =
+  "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";

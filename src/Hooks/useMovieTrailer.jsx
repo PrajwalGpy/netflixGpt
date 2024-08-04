@@ -24,7 +24,7 @@ const useMovieTrailer = (videoId) => {
       dispatch(addTrailer(Trailer));
     } catch (error) {
       console.error("Failed to fetch movie video:", error);
-      console.log("Using fallback data");
+
       const fallbackTrailer = localTrailers[0];
       dispatch(addTrailer(fallbackTrailer));
     }

@@ -9,7 +9,6 @@ const useNowPlayingMovie = () => {
 
   const loadNewMovies = async () => {
     try {
-      console.log("Fetching data from API...");
       let response = await fetch(
         "https://api.themoviedb.org/3/movie/now_playing?page=1",
         API__OPTION
@@ -18,14 +17,14 @@ const useNowPlayingMovie = () => {
         throw new Error("Network response was not ok");
       }
       let data = await response.json();
-      console.log("now_playing", data);
+
       dispatch(addNowPlayingMovie(data.results));
     } catch (error) {
       console.error(
         "Failed to fetch data from API, using fallback data:",
         error
       );
-      console.log("Fallback data:", nowPlayingMovies[0].results);
+
       dispatch(addNowPlayingMovie(nowPlayingMovies[0].results));
     }
   };

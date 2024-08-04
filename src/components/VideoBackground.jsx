@@ -5,7 +5,6 @@ export const VideoBackground = ({ videoId }) => {
   // Corrected typo
   useMovieTrailer(videoId);
   const trailer = useSelector((state) => state.movies.trailer);
-  console.log(trailer);
 
   return (
     <div className="   ">
