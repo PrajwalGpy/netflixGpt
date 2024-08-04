@@ -8,10 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/useSlice";
 import { RiRobot3Fill } from "react-icons/ri";
 import { toggleGptSearchView } from "../utils/gptSlice";
+import { GoHomeFill } from "react-icons/go";
 
 const Header = () => {
   const dispatch = useDispatch();
   let navigator = useNavigate();
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const user = useSelector((store) => store.user);
   const handelSignOut = () => {
@@ -51,8 +53,12 @@ const Header = () => {
             className="flex bg-red-600 hover:bg-opacity-80 text-white cursor-pointer font-semibold py-2 px-2 rounded-lg items-center justify-center gap-3"
             onClick={handleGptClick}
           >
-            <RiRobot3Fill className="text-xl" />
-            <p> GPT Search</p>
+            {!showGptSearch ? (
+              <RiRobot3Fill className="text-xl" />
+            ) : (
+              <GoHomeFill className="text-xl" />
+            )}
+            <p>{!showGptSearch ? "GPT Search" : "Home"} </p>
           </div>
           <div className="flex  items-center justify-center gap-3">
             <img

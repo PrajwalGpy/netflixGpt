@@ -10,7 +10,7 @@ export const MainContainer = () => {
     return <div>No movies available</div>;
   }
 
-  const mainMovie = movies[13];
+  const mainMovie = movies[10];
 
   const { original_title, overview, id } = mainMovie;
 
