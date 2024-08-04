@@ -1,6 +1,5 @@
 import React from "react";
 import { MovieCards } from "./MovieCards";
-import "./MovieList.css"; // Ensure this is correctly imported
 
 export const MovieList = ({ title, movies }) => {
   return (

@@ -1,9 +1,12 @@
 import React, { useRef } from "react";
 import { groq } from "../utils/Groq";
 import { API__OPTION } from "../utils/constencs";
+import { useDispatch } from "react-redux";
+import { addGptMovieResult } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
   let searchText = useRef(null);
+  const dispatch = useDispatch();
 
   const serarchMovieTMDB = async (Movie) => {
     const data = await fetch(
@@ -38,6 +41,9 @@ const GptSearchBar = () => {
     const promiseArray = gpyMovies.map((Movie) => serarchMovieTMDB(Movie));
     const tmdbResult = await Promise.all(promiseArray);
     console.log(tmdbResult);
+    dispatch(
+      addGptMovieResult({ movieNames: gpyMovies, movieResults: tmdbResult })
+    );
   };
   return (
     <div className="pt-[10%] flex justify-center">
