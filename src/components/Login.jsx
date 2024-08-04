@@ -8,7 +8,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/FireBase";
-import netflix_Prifile_img from "../assets/netflix-profile-pictures.webp";
+import netflix_Prifile_img from "../assets/prifile.svg";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/useSlice";
 
@@ -81,12 +81,16 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="absolute">
-        <img src={netflix_Banner} alt="Netflix Banner" />
+      <div className="absolute  w-full h-full">
+        <img
+          src={netflix_Banner}
+          alt="Netflix Banner"
+          className="w-full h-full object-cover"
+        />
       </div>
       <form
         onSubmit={handleSubmit}
-        className="absolute bg-black bg-opacity-90 text-white w-3/12 my-40 mx-auto left-0 right-0 flex flex-col gap-5 p-10 rounded-lg"
+        className="absolute bg-black bg-opacity-90 text-white w-3/4 md:w-3/12 my-40 mx-auto left-0 right-0 flex flex-col gap-5 p-10 rounded-lg"
       >
         <div className="text-3xl font-bold ">
           {userSignIn ? "Sign In" : "Sign Up"}

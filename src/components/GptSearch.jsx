@@ -6,8 +6,12 @@ import netflixLoginBG from "../assets/netflix-Login-BG-img.jpg";
 export const GptSearch = () => {
   return (
     <div>
-      <div className="fixed -z-10">
-        <img src={netflixLoginBG} alt="" />
+      <div className="fixed -z-10 w-full h-full">
+        <img
+          src={netflixLoginBG}
+          alt=""
+          className="w-full h-full object-cover "
+        />
       </div>
       <GptSearchBar />
       <GptMovieSuggestion />

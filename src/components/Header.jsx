@@ -9,6 +9,7 @@ import { addUser, removeUser } from "../utils/useSlice";
 import { RiRobot3Fill } from "react-icons/ri";
 import { toggleGptSearchView } from "../utils/gptSlice";
 import { GoHomeFill } from "react-icons/go";
+import { CgProfile } from "react-icons/cg";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -44,35 +45,38 @@ const Header = () => {
     dispatch(toggleGptSearchView());
   };
   return (
-    <div className="w-full absolute bg-gradient-to-b from-black px-4 py-4 z-50 flex justify-between items-center">
-      <img src={netflix_Logo} alt="Netflix_Logo" className="w-36" />
+    <div className="flex px-2  items-center justify-between  w-full absolute bg-gradient-to-b from-black md:px-4 md:py-4 z-50 md:flex md:justify-between md:items-center md:flex-row">
+      <img src={netflix_Logo} alt="Netflix_Logo" className=" w-28 md:w-36 " />
 
       {user && (
-        <dir className="flex items-center justify-center gap-10">
+        <dir className="flex items-center justify-center md:gap-10">
           <div
-            className="flex bg-red-600 hover:bg-opacity-80 text-white cursor-pointer font-semibold py-2 px-2 rounded-lg items-center justify-center gap-3"
+            className="flex bg-red-600 hover:bg-opacity-80 text-white cursor-pointer font-semibold py-1 px-2 md:py-2 md:px-2 rounded-lg items-center justify-center md:gap-3"
             onClick={handleGptClick}
           >
             {!showGptSearch ? (
-              <RiRobot3Fill className="text-xl" />
+              <RiRobot3Fill className="text-base md:text-xl " />
             ) : (
-              <GoHomeFill className="text-xl" />
+              <GoHomeFill className="text-base md:text-xl" />
             )}
-            <p>{!showGptSearch ? "GPT Search" : "Home"} </p>
+            <p className="text-xs md:text-lg">
+              {!showGptSearch ? "GPT Search" : "Home"}{" "}
+            </p>
           </div>
-          <div className="flex  items-center justify-center gap-3">
+          <div className="flex  items-center justify-center md:gap-3">
             <img
               src={user.photoURL || netflix_Prifile_img}
               alt="netflix profile pictures "
-              className="w-14"
+              className="w-14 hidden md:flex"
             />
+            <CgProfile className="text-white m-2 text-3xl md:hidden" />
 
-            <button
-              className=" hover:bg-opacity-80 text-white font-semibold py-2 px-2 rounded-lg"
+            <p
+              className=" hover:bg-opacity-80 text-white font-semibold md:py-2 md:px-2  text-xs md:text-lg"
               onClick={handelSignOut}
             >
               Sign Out
-            </button>
+            </p>
           </div>
         </dir>
       )}
